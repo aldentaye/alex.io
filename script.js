@@ -23,6 +23,16 @@ const educationSectionX = 400;
 const workExperienceSectionX = 800;
 const contactInfoSectionX = 1200;
 
+// Left and right listener to move dog across
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight' && dogX < canvas.width - 200) {
+        dogX += dogSpeed;
+    } else if (event.key === 'ArrowLeft' && dogX > 0) {
+        dogX -= dogSpeed;
+    }
+    updateResumePosition();
+});
+
 // Update the position of resume sections
 function updateResumePosition() {
     // Determine the current section based on the dog's position
@@ -77,16 +87,6 @@ function draw() {
 
     // Move background
     backgroundX -= 2; // Adjust the speed as needed
-
-    // Move dog based on user input
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowRight' && dogX < canvas.width - 200) {
-            dogX += dogSpeed;
-        } else if (event.key === 'ArrowLeft' && dogX > 0) {
-            dogX -= dogSpeed;
-        }
-        updateResumePosition();
-    });
 
     // Reset background position
     if (backgroundX <= -canvas.width) {
