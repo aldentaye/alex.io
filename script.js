@@ -10,12 +10,18 @@ backgroundImage.src = './images/background.jpg';
 const dogImage = new Image();
 dogImage.src = './images/dog.png';
 
-// Game variables
+// Dog positioning
 let backgroundX = 0;
 let dogX = 50;
-const dogY = 150;
+const dogY = canvas.height - 100;
 const dogSpeed = 5; // Adjust the dog's movement speed
 const sectionWidth = 200; // Adjust the width of each resume section
+
+// Resume sections
+const nameSectionX = 100;
+const educationSectionX = 400;
+const workExperienceSectionX = 800;
+const contactInfoSectionX = 1200;
 
 // Update the position of resume sections
 function updateResumePosition() {
@@ -31,8 +37,35 @@ function updateResumePosition() {
     document.getElementById(`section-${currentSection}`).style.display = 'block';
 }
 
+function updateTextSheets() {
+    // Check if the dog is within each resume section
+    if (dogX >= nameSectionX && dogX < educationSectionX) {
+        document.getElementById('name-section').style.display = 'block';
+    } else {
+        document.getElementById('name-section').style.display = 'none';
+    }
+
+    if (dogX >= educationSectionX && dogX < workExperienceSectionX) {
+        document.getElementById('education-section').style.display = 'block';
+    } else {
+        document.getElementById('education-section').style.display = 'none';
+    }
+
+    if (dogX >= workExperienceSectionX && dogX < contactInfoSectionX) {
+        document.getElementById('work-experience-section').style.display = 'block';
+    } else {
+        document.getElementById('work-experience-section').style.display = 'none';
+    }
+
+    if (dogX >= contactInfoSectionX) {
+        document.getElementById('contact-info-section').style.display = 'block';
+    } else {
+        document.getElementById('contact-info-section').style.display = 'none';
+    }
+}
+
 // Main game loop
-function draw() {
+function walk() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -65,4 +98,4 @@ function draw() {
 }
 
 // Start the game loop
-draw();
+walk();
