@@ -28,6 +28,14 @@ canvas {
     max-height: 100%;
 }
 
+/* Adjustments for smaller screens */
+@media only screen and (max-width: 600px) {
+    canvas {
+        width: 90%;
+        height: 90%;
+    }
+}
+
 /* Initially hide text sheets */
 .text-sheet {
     display: none;
