@@ -11,10 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const dogImage = new Image();
     dogImage.src = './images/dog.png';
 
+    // Dog size
+    const dogWidth = 50;
+    const dogHeight = 50; 
+
     // Dog positioning
     let backgroundX = 0;
     let dogX = 50;
-    const dogY = canvas.height - 100;
+    const dogY = canvas.height - 40;
     const dogSpeed = 5; // Adjust the dog's movement speed
     const sectionWidth = 200; // Adjust the width of each resume section
 
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.drawImage(backgroundImage, backgroundX, 0, canvas.width, canvas.height);
 
         // Draw dog
-        ctx.drawImage(dogImage, dogX, dogY);
+        ctx.drawImage(dogImage, dogX, dogY, dogWidth, dogHeight);
 
         // Repeat drawing
         requestAnimationFrame(draw);
@@ -46,11 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
             dogX += dogSpeed;
             // Move background left (simulate dog moving right)
             backgroundX -= dogSpeed;
-        } else if (event.key === 'ArrowLeft' && dogX > 0) {
+            console.log("right key detected")
+        } else if (event.key === 'ArrowLeft' && dogX > 50) {
             // Move dog left
             dogX -= dogSpeed;
             // Move background right (simulate dog moving left)
             backgroundX += dogSpeed;
+            console.log("left key detected")
         }
     });
 
@@ -95,29 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('contact-info-section').style.display = 'none';
         }
     }
-
-    // // Main game loop
-    // function draw() {
-    //     // Clear canvas
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //     // Draw background
-    //     ctx.drawImage(backgroundImage, backgroundX, 0, canvas.width, canvas.height);
-
-    //     // Draw dog
-    //     ctx.drawImage(dogImage, dogX, dogY);
-
-    //     // Move background
-    //     backgroundX -= 2; // Adjust the speed as needed
-
-    //     // Reset background position
-    //     if (backgroundX <= -canvas.width) {
-    //         backgroundX = 0;
-    //     }
-
-    //     // Repeat drawing
-    //     requestAnimationFrame(draw);
-    // }
 
     // Start the game loop
     draw();
