@@ -24,15 +24,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const workExperienceSectionX = 800;
     const contactInfoSectionX = 1200;
 
-    // Left and right listener to move dog across
+    // Main game loop
+    function draw() {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw background
+        ctx.drawImage(backgroundImage, backgroundX, 0, canvas.width, canvas.height);
+
+        // Draw dog
+        ctx.drawImage(dogImage, dogX, dogY);
+
+        // Repeat drawing
+        requestAnimationFrame(draw);
+    }
+
+    // Move dog based on user input
     document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowRight' && dogX < canvas.width - 200) {
+        if (event.key === 'ArrowRight' && dogX < canvas.width - dogImage.width) {
+            // Move dog right
             dogX += dogSpeed;
+            // Move background left (simulate dog moving right)
+            backgroundX -= dogSpeed;
         } else if (event.key === 'ArrowLeft' && dogX > 0) {
+            // Move dog left
             dogX -= dogSpeed;
+            // Move background right (simulate dog moving left)
+            backgroundX += dogSpeed;
         }
-        updateResumePosition();
     });
+
 
     // Update the position of resume sections
     // function updateResumePosition() {
@@ -75,28 +96,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Main game loop
-    function draw() {
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // // Main game loop
+    // function draw() {
+    //     // Clear canvas
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Draw background
-        ctx.drawImage(backgroundImage, backgroundX, 0, canvas.width, canvas.height);
+    //     // Draw background
+    //     ctx.drawImage(backgroundImage, backgroundX, 0, canvas.width, canvas.height);
 
-        // Draw dog
-        ctx.drawImage(dogImage, dogX, dogY);
+    //     // Draw dog
+    //     ctx.drawImage(dogImage, dogX, dogY);
 
-        // Move background
-        backgroundX -= 2; // Adjust the speed as needed
+    //     // Move background
+    //     backgroundX -= 2; // Adjust the speed as needed
 
-        // Reset background position
-        if (backgroundX <= -canvas.width) {
-            backgroundX = 0;
-        }
+    //     // Reset background position
+    //     if (backgroundX <= -canvas.width) {
+    //         backgroundX = 0;
+    //     }
 
-        // Repeat drawing
-        requestAnimationFrame(draw);
-    }
+    //     // Repeat drawing
+    //     requestAnimationFrame(draw);
+    // }
 
     // Start the game loop
     draw();
