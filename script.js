@@ -65,7 +65,7 @@ function updateTextSheets() {
 }
 
 // Main game loop
-function walk() {
+function draw() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -98,4 +98,4 @@ function walk() {
 }
 
 // Start the game loop
-walk();
+draw();
