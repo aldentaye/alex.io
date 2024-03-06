@@ -1,107 +1,122 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Get canvas element by id
-    const canvas = document.getElementById('game-canvas');
 
-    // Get 2D rendering context
-    const ctx = canvas.getContext('2d');
+// Get canvas element by id
+const canvas = document.getElementById('game-canvas');
 
-    // Image variables 
-    const backgroundImage = new Image();
-    backgroundImage.src = './images/background.jpg';
-    const dogImage = new Image();
-    dogImage.src = './images/dog.png';
+// Get 2D rendering context
+const ctx = canvas.getContext('2d');
 
-    // Dog size
-    const dogWidth = 50;
-    const dogHeight = 50; 
+// Images 
+const backgroundImage = new Image();
+backgroundImage.src = './images/background_new.jpg';
+const dogImage = new Image();
+dogImage.src = './images/dog.png';
 
-    // Dog positioning
-    let backgroundX = 0;
-    let dogX = 50;
-    const dogY = canvas.height - 40;
-    const dogSpeed = 5; // Adjust the dog's movement speed
-    const sectionWidth = 200; // Adjust the width of each resume section
+// Dog size
+const dogWidth = 50;
+const dogHeight = 50; 
 
-    // Resume sections
-    const nameSectionX = 100;
-    const educationSectionX = 400;
-    const workExperienceSectionX = 800;
-    const contactInfoSectionX = 1200;
+// Dog positioning
+let backgroundX = 0;
+let dogX = 50;
+const dogY = canvas.height - 50;
+const dogSpeed = 5;
 
-    // Main game loop
-    function draw() {
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Resume levels
+// const sectionWidth = 200; 
+const nameSectionX = 50;
+const educationSectionX = 100;
+const workExperienceSectionX = 150;
+const contactInfoSectionX = 200;
 
-        // Draw background
-        ctx.drawImage(backgroundImage, backgroundX, 0, canvas.width, canvas.height);
-
-        // Draw dog
-        ctx.drawImage(dogImage, dogX, dogY, dogWidth, dogHeight);
-
-        // Repeat drawing
-        requestAnimationFrame(draw);
+function moveLeft() {
+    if (dogX > 50) {
+        dogX -= dogSpeed;
+        backgroundX += dogSpeed;
     }
+}
 
-    // Move dog based on user input
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowRight' && dogX < canvas.width - dogImage.width) {
-            // Move dog right
-            dogX += dogSpeed;
-            // Move background left (simulate dog moving right)
-            backgroundX -= dogSpeed;
-            console.log("right key detected")
-        } else if (event.key === 'ArrowLeft' && dogX > 50) {
-            // Move dog left
-            dogX -= dogSpeed;
-            // Move background right (simulate dog moving left)
-            backgroundX += dogSpeed;
-            console.log("left key detected")
-        }
-    });
-
-
-    // Update the position of resume sections
-    // function updateResumePosition() {
-    //     // Determine the current section based on the dog's position
-    //     const currentSection = Math.floor(dogX / sectionWidth);
-
-    //     // Hide all resume sections
-    //     document.querySelectorAll('#resume > div').forEach(section => {
-    //         section.style.display = 'none';
-    //     });
-
-    //     // Show the current section
-    //     document.getElementById(`section-${currentSection}`).style.display = 'block';
-    // }
-
-    function updateTextSheets() {
-        // Check if the dog is within each resume section
-        if (dogX >= nameSectionX && dogX < educationSectionX) {
-            document.getElementById('name-section').style.display = 'block';
-        } else {
-            document.getElementById('name-section').style.display = 'none';
-        }
-
-        if (dogX >= educationSectionX && dogX < workExperienceSectionX) {
-            document.getElementById('education-section').style.display = 'block';
-        } else {
-            document.getElementById('education-section').style.display = 'none';
-        }
-
-        if (dogX >= workExperienceSectionX && dogX < contactInfoSectionX) {
-            document.getElementById('work-experience-section').style.display = 'block';
-        } else {
-            document.getElementById('work-experience-section').style.display = 'none';
-        }
-
-        if (dogX >= contactInfoSectionX) {
-            document.getElementById('contact-info-section').style.display = 'block';
-        } else {
-            document.getElementById('contact-info-section').style.display = 'none';
-        }
+function moveRight() {
+    if (dogX < canvas.width - dogWidth) {
+        dogX += dogSpeed;
+        backgroundX -= dogSpeed;
     }
+}
 
-    // Start the game loop
-    draw();
+// Move dog based on user input
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+        moveRight()
+    } else if (event.key === 'ArrowLeft') {
+        moveLeft()
+    }
 });
+
+// Main game loop
+function draw() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Calculate the position to draw the background image
+    const bgX = backgroundX % canvas.width;
+
+    // Draw the background image
+    ctx.drawImage(backgroundImage, bgX, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImage, bgX + canvas.width, 0, canvas.width, canvas.height);
+
+ 
+    // Draw the dog
+    ctx.drawImage(dogImage, dogX, dogY, dogWidth, dogHeight);
+
+    requestAnimationFrame(draw);
+    updateTextSheets()
+}
+
+function updateTextSheets() {
+    // Check if the dog is within each resume section
+    if (dogX >= nameSectionX && dogX < educationSectionX) {
+        document.getElementById('name-section').style.display = 'block';
+    } else {
+        document.getElementById('name-section').style.display = 'none';
+    }
+
+    if (dogX >= educationSectionX && dogX < workExperienceSectionX) {
+        document.getElementById('education-section').style.display = 'block';
+    } else {
+        document.getElementById('education-section').style.display = 'none';
+    }
+
+    if (dogX >= workExperienceSectionX && dogX < contactInfoSectionX) {
+        document.getElementById('work-experience-section').style.display = 'block';
+    } else {
+        document.getElementById('work-experience-section').style.display = 'none';
+    }
+
+    if (dogX >= contactInfoSectionX) {
+        document.getElementById('contact-info-section').style.display = 'block';
+    } else {
+        document.getElementById('contact-info-section').style.display = 'none';
+    }
+}
+
+
+
+draw();
+
+
+// Update the position of resume sections
+// function updateResumePosition() {
+//     // Determine the current section based on the dog's position
+//     const currentSection = Math.floor(dogX / sectionWidth);
+
+//     // Hide all resume sections
+//     document.querySelectorAll('#resume > div').forEach(section => {
+//         section.style.display = 'none';
+//     });
+
+//     // Show the current section
+//     document.getElementById(`section-${currentSection}`).style.display = 'block';
+// }
+
+
+
+

@@ -29,6 +29,6 @@ canvas {
 }
 
 /* Initially hide text sheets */
-/* .text-sheet {
+.text-sheet {
     display: none;
-} */
+}
