@@ -4,11 +4,11 @@ const canvas = document.getElementById('game-canvas');
 // Get 2D rendering context
 const ctx = canvas.getContext('2d');
 
+// Image variables 
 const backgroundImage = new Image();
-backgroundImage.src = '/images/background.jpg';
-
+backgroundImage.src = 'images/background.jpg';
 const dogImage = new Image();
-dogImage.src = '/images/dog.png';
+dogImage.src = 'images/dog.png';
 
 // Game variables
 let backgroundX = 0;
