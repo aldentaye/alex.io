@@ -35,18 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Update the position of resume sections
-    function updateResumePosition() {
-        // Determine the current section based on the dog's position
-        const currentSection = Math.floor(dogX / sectionWidth);
+    // function updateResumePosition() {
+    //     // Determine the current section based on the dog's position
+    //     const currentSection = Math.floor(dogX / sectionWidth);
 
-        // Hide all resume sections
-        document.querySelectorAll('#resume > div').forEach(section => {
-            section.style.display = 'none';
-        });
+    //     // Hide all resume sections
+    //     document.querySelectorAll('#resume > div').forEach(section => {
+    //         section.style.display = 'none';
+    //     });
 
-        // Show the current section
-        document.getElementById(`section-${currentSection}`).style.display = 'block';
-    }
+    //     // Show the current section
+    //     document.getElementById(`section-${currentSection}`).style.display = 'block';
+    // }
 
     function updateTextSheets() {
         // Check if the dog is within each resume section
