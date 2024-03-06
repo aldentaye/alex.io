@@ -1,3 +1,9 @@
+// Get canvas element by id
+const canvas = document.getElementById('game-canvas');
+
+// Get 2D rendering context
+const ctx = canvas.getContext('2d');
+
 // Game variables
 let backgroundX = 0;
 let dogX = 50;
