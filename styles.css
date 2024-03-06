@@ -1,40 +1,20 @@
-/* Background container */
-#background-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrollbars */
 }
 
-/* Background image */
-#background-image {
-    width: 100%;
-    height: auto;
+canvas {
+    display: block;
+    margin: auto;
+    background-color: #ccc; /* Fallback color */
 }
 
-/* Dog container */
-#dog-container {
-    position: absolute;
-    top: 150px; /* Adjust the top position */
-    left: 50px; /* Adjust the left position */
-}
-
-/* Dog image */
-#dog-image {
-    width: 200px; /* Adjust the width of the dog image */
-    height: auto;
-    z-index: 1; /* Ensure the dog is displayed on top of the background */
-}
-
-/* Resume sections */
-#resume {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2; /* Ensure the resume sections are displayed on top of the dog */
-    color: white; /* Example text color */
+#game-canvas {
+    border: 1px solid #000;
 }
 
 /* Initially hide text sheets */
-.text-sheet {
+/* .text-sheet {
     display: none;
-}
+} */
